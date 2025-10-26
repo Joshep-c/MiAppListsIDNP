@@ -143,3 +143,5 @@ val items = remember { mutableStateListOf<Item>() }
 La estructura `if (id.isNotBlank() && curso.isNotBlank())` actúa como una capa de validación lógica y funcional, asegurando que solo se procesen entradas válidas y controlando el flujo entre agregar y modificar elementos.
 
 Combinado con `mutableStateListOf`, se logra un comportamiento reactivo, limpio y seguro, garantizando que los datos y la interfaz siempre estén sincronizados.
+
+**Autor:** Joshep Antony Ccahuana Larota
