@@ -11,13 +11,12 @@ import androidx.compose.ui.unit.dp
 @Composable
 fun ItemScreen() {
     var id by remember { mutableStateOf("") }
-    var texto by remember { mutableStateOf("") }
+    var curso by remember { mutableStateOf("") }
 
-    // Lista observable mutable - MÁS ÓPTIMO
     val items = remember {
         mutableStateListOf<Item>().apply {
             for (i in 1..100) {
-                add(Item(i.toString(), "Nombre $i | Descripcion $i"))
+                add(Item(i.toString(), "Curso: $i | Descripcion: $i"))
             }
         }
     }
@@ -42,9 +41,9 @@ fun ItemScreen() {
                 Spacer(modifier = Modifier.height(12.dp))
 
                 OutlinedTextField(
-                    value = texto,
-                    onValueChange = { texto = it },
-                    label = { Text("Texto") },
+                    value = curso,
+                    onValueChange = { curso = it },
+                    label = { Text("Nombre del curso") },
                     modifier = Modifier.fillMaxWidth()
                 )
 
@@ -56,18 +55,18 @@ fun ItemScreen() {
                 ) {
                     Button(
                         onClick = {
-                            if (id.isNotBlank() && texto.isNotBlank()) {
+                            if (id.isNotBlank() && curso.isNotBlank()) {
                                 // Busca el índice del item
                                 val index = items.indexOfFirst { it.id == id }
                                 if (index != -1) {
                                     // Modifica directamente en la lista
-                                    items[index] = Item(id, texto)
+                                    items[index] = Item(id, curso)
                                 } else {
                                     // Agrega nuevo item
-                                    items.add(Item(id, texto))
+                                    items.add(Item(id, curso))
                                 }
                                 id = ""
-                                texto = ""
+                                curso = ""
                             }
                         },
                         modifier = Modifier.weight(1f)
@@ -78,7 +77,7 @@ fun ItemScreen() {
                     OutlinedButton(
                         onClick = {
                             items.forEach { item ->
-                                println("Item: ${item.id} | ${item.texto}")
+                                println("Item: ${item.id} | ${item.curso}")
                             }
                         },
                         modifier = Modifier.weight(1f)
@@ -114,7 +113,7 @@ fun ItemScreen() {
                         )
                         Spacer(modifier = Modifier.height(4.dp))
                         Text(
-                            text = item.texto,
+                            text = item.curso,
                             style = MaterialTheme.typography.bodyMedium,
                             color = MaterialTheme.colorScheme.onPrimaryContainer
                         )
